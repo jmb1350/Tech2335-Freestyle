@@ -23,7 +23,6 @@ t_zip = "11371"
 
 #TODO: Pull this from aviationstack
 flight_arrival = "2020-06-30T08:00"
-print(flight_arrival)
 
 request_url = f"http://www.mapquestapi.com/directions/v2/optimizedroute?key={MAPS_KEY}&from={f_street},+{f_city},+{f_state},+{f_zip}&to={t_street},+{t_city},+{t_state},+{t_zip}&timeType=3&isoLocal={flight_arrival}"
 
