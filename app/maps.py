@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timedelta
 
+# from app import APP_ENV
+# from app.flights import flight_details
+
 load_dotenv()
 
 MAPS_KEY = os.environ.get("MAPQUEST_API")
