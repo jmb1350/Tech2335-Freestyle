@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timedelta
 
-# from app import APP_ENV
 # from app.flights import flight_details
 
 load_dotenv()
@@ -40,7 +39,11 @@ def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE
 if __name__ == "__main__":
 
     if APP_ENV == "development":
-        results = get_departure_time()
+        f_street = input("PLEASE INPUT YOUR STREET ADDRESS:")
+        f_city = input("PLEASE INPUT YOUR CITY:")
+        f_state = input("PLEASE INPUT YOUR STATE (e.g. NY):")
+        f_zip = input("PLEASE INPUT YOUR ZIP CODE (e.g. 10012):")
+        results = get_departure_time(f_street=f_street,f_city=f_city,f_state=f_state,f_zip=f_zip)
     else:
         results = get_departure_time()
     print(f"LEAVE AT: {results}")    
