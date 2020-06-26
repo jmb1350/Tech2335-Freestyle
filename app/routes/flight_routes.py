@@ -2,12 +2,12 @@
 
 from flask import Blueprint, render_template, request
 
-# from app.weather_service import get_hourly_forecasts
+from app.maps import get_departure_time
 
 flight_routes = Blueprint("flight_routes", __name__)
 
 @flight_routes.route("/")
-def weather_form():
+def flight_form():
     print("VISITED THE FLIGHT FORM...")
     return render_template("flight_form.html")
 
@@ -15,10 +15,15 @@ def weather_form():
 def departure_details():
     print("GENERATING DEPARTURE INFORMATION...")
 
-
     print("FORM DATA:", dict(request.form)) #> {'zip_code': '20057'}
-    # zip_code = request.form["zip_code"]
-    # results = get_hourly_forecasts(zip_code)
-    # print(results.keys())
-    # return render_template(#"flight_data.html", flight_number=flight_number, results=results)
-    return("okay")
+    address = request.form["f_address"]
+    city = request.form["f_city"]
+    state = request.form["f_state"]
+    zip_code = request.form["f_zip"]
+    flight_number = request.form["flight_number"]
+    airline = request.form["airline"]
+
+    results = get_departure_time(address, city, state, zip_code, flight_number, airline)
+    print(results.keys())
+    return render_template("flight_data.html", flight_number=flight_number, results=results)
+    # return("okay")
