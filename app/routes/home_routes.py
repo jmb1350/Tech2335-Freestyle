@@ -25,5 +25,5 @@ def create_user():
     # FYI: "warning", "primary", "danger", "success", etc. are bootstrap color classes
     # ... see https://getbootstrap.com/docs/4.3/components/alerts/
     # ... and the flash messaging section of the "bootstrap_layout.html" file for more details
-    flash(f"User '{user['full_name']}' created successfully! (TODO)", "warning")
+    flash("okay!", "success")
     return redirect("/")

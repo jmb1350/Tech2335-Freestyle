@@ -7,14 +7,14 @@
 
     <p>Input your address and flight information below to be given your departure time.</p>
 
-    <form action="/home/flight" method="POST">
+    <form action="/departure_details" method="POST">
 
         <label>Street Address:</label>
-        <input type="text" name="f_street" placeholder="44 W 4th St" value="20057">
+        <input type="text" name="f_address" placeholder="44 W 4th St">
         <br>
 
         <label>City:</label>
-        <input type="text" name="f_city" placeholder="New York" value="20057">
+        <input type="text" name="f_city" placeholder="New York">
         <br>
 
         <label>State:</label>
@@ -74,11 +74,15 @@
         <br>
 
         <label>Zip:</label>
-        <input type="text" name="f_zip" placeholder="10012" value="20057">
+        <input type="text" name="zip" placeholder="10012">
         <br>
 
         <label>Flight Number:</label>
-        <input type="text" name="f_number" placeholder="DL5194" value="20057">
+        <input type="text" name="flight_number" placeholder="DL5194">
+        <br>
+
+        <label>Airline:</label>
+        <input type="text" name="airline" placeholder="Delta">
         <br>
 
         <button>Submit</button>
