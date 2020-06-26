@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timedelta
 
-# from app.flights import flight_details
+from app.flights import estimated_arrival
+from app.flights import arrival_airport
+from app.flights import timezone
 
 load_dotenv()
 APP_ENV = os.environ.get('APP_ENV', 'Dev')
@@ -15,16 +17,14 @@ ADDRESS = os.environ.get("ADDRESS")
 CITY = os.environ.get("CITY")
 STATE = os.environ.get("STATE")
 ZIP_CODE = os.environ.get("ZIP_CODE")
-#TODO: pull airport address from aviation stack
-TADDRESS = os.environ.get("TADDRESS")
-TCITY = os.environ.get("TCITY")
-TSTATE = os.environ.get("TSTATE")
-TZIP_CODE = os.environ.get("TZIP_CODE")
-#TODO: Pull flight arrival from aviationstack
-flight_arrival = estimated_arrival         #this is the variable I use in my flights.py script
 
-def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,t_street=TADDRESS,t_city=TCITY,t_state=TSTATE,t_zip=TZIP_CODE,flight_arrival=flight_arrival):
-    request_url = f"http://www.mapquestapi.com/directions/v2/optimizedroute?key={MAPS_KEY}&from={f_street},+{f_city},+{f_state},+{f_zip}&to={t_street},+{t_city},+{t_state},+{t_zip}&timeType=3&isoLocal={flight_arrival}"
+flight_arrival = estimated_arrival[:-6]
+airport = arrival_airport
+t_city = timezone
+
+
+def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,airport=arrival_airport,t_city=timezone,flight_arrival=flight_arrival):
+    request_url = f"http://www.mapquestapi.com/directions/v2/optimizedroute?key={MAPS_KEY}&from={f_street},+{f_city},+{f_state},+{f_zip}&to={t_city},+{airport}&timeType=3&isoLocal={flight_arrival}"
     response = requests.get(request_url)
     response_data = json.loads(response.text)
     print(response.status_code)

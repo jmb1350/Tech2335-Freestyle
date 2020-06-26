@@ -23,14 +23,14 @@ load_dotenv()
 
 FLIGHT_KEY = os.environ.get("PLANE_API_KEY")
 flight = "1587"
-airline = "AA"
+airline = "American Airlines"
 
 
-request_url = f"http://api.aviationstack.com/v1/flights?access_key={FLIGHT_KEY}&airline_iata={airline}&flight_number={flight}&flight_status=active"
-
+request_url = f"http://api.aviationstack.com/v1/flights?access_key={FLIGHT_KEY}&airline_name={airline}&flight_number={flight}&flight_status=active"
 
 response = requests.get(request_url)
-api_response = json.loads(response.text) 
+api_response = json.loads(response.text)
+# print(api_response) 
 
 
 
@@ -40,6 +40,9 @@ api_response = json.loads(response.text)
 #this was helpful in getting the list to respond correctly.
 arrival_airport = (api_response['data'][0]['arrival']['airport'])
 print(arrival_airport)
+
+timezone = (api_response['data'][0]['arrival']['timezone'][8:])
+print(timezone)
 
 estimated_arrival = (api_response['data'][0]['arrival']['estimated_runway'])
 print(estimated_arrival)
