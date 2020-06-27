@@ -18,14 +18,14 @@ def departure_details():
     print("GENERATING DEPARTURE INFORMATION...")
 
     print("FORM DATA:", dict(request.form)) #> {'zip_code': '20057'}
-    address = request.form["f_address"]
-    city = request.form["f_city"]
-    state = request.form["f_state"]
-    zip_code = request.form["f_zip"]
-    flight_number = request.form["flight_number"]
+    f_address = request.form["f_address"]
+    f_city = request.form["f_city"]
+    f_state = request.form["f_state"]
+    f_zip = request.form["f_zip"]
+    flight = request.form["flight"]
     airline = request.form["airline"]
 
-    results = get_flight_information(flight_number, airline)+get_departure_time(address, city, state, zip_code)
+    results = get_flight_information(flight, airline) and get_departure_time(f_address, f_city, f_state, f_zip)
     print(results.keys())
     return render_template("flight_data.html", flight=flight, airline=airline, results=results)
     # return("okay")
