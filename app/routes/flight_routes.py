@@ -27,5 +27,6 @@ def departure_details():
 
     results = get_flight_information(flight, airline) and get_departure_time(f_address, f_city, f_state, f_zip)
     print(results.keys())
+    flash(f"Information submitted successfully", "success")
     return render_template("flight_data.html", flight=flight, airline=airline, results=results)
     # return("okay")
