@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timedelta
 
-from flights import get_flight_information
+from app.flights import get_flight_information
 
 load_dotenv()
 APP_ENV = os.environ.get('APP_ENV', 'Dev')

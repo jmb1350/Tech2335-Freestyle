@@ -25,6 +25,6 @@ def flight_details():
     # FYI: "warning", "primary", "danger", "success", etc. are bootstrap color classes
     # ... see https://getbootstrap.com/docs/4.3/components/alerts/
     # ... and the flash messaging section of the "bootstrap_layout.html" file for more details
-    flash("okay!", "success")
+    # flash("okay!", "success")
     # flash(f"Depart at: '{user['full_name']}'(TODO)", "warning")
     return redirect("/departure_details")

@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timedelta
 
-from flights import get_flight_information
-from maps import get_departure_time
+from app.flights import get_flight_information
+from app.maps import get_departure_time
 
 load_dotenv()
 APP_ENV = os.environ.get('APP_ENV', 'Dev')
@@ -30,7 +30,7 @@ if __name__ == "__main__":
         results = get_flight_information(airline=airline,flight=flight)
     else:
         results = get_flight_information()
-    print(results)
+    # print(results)
 
 if __name__ == "__main__":
 
