@@ -2,17 +2,9 @@
 
 {% block content %}
 
-    <h2>Departure Details for {{ results["f_flight"].title() }}</h2>
+    <h2>Departure Details for Flight {{ results['flight'] }} on {{ results['airline'] }} <!--{{ results["flight"]["airline"].title() }} --></h2>
 
-    <p>Flight: {{ f_number }}</p>
-
-    <!-- TODO: consider using a table instead of a list -->
-    <!-- https://www.w3schools.com/html/html_tables.asp -->
-    <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->
-    <ul>
-    {% for hourly in results["hourly_forecasts"] %}
-        <li>{{ hourly["timestamp"] }} | {{ hourly["temp"] }} | {{ hourly["conditions"].upper() }}</li>
-    {% endfor %}
-    </ul>
-
+    <p>Depart by {{ results }} to get to the airport on time!</p>
+    <!--<p>{{ results }}</p> -->
+    
 {% endblock %}

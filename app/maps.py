@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timedelta
 
-# from app import APP_ENV
-# from app.flights import flight_details
+from app.flights import get_flight_information
 
 load_dotenv()
 APP_ENV = os.environ.get('APP_ENV', 'Dev')
@@ -16,16 +15,14 @@ ADDRESS = os.environ.get("ADDRESS")
 CITY = os.environ.get("CITY")
 STATE = os.environ.get("STATE")
 ZIP_CODE = os.environ.get("ZIP_CODE")
-#TODO: pull airport address from aviation stack
-TADDRESS = os.environ.get("TADDRESS")
-TCITY = os.environ.get("TCITY")
-TSTATE = os.environ.get("TSTATE")
-TZIP_CODE = os.environ.get("TZIP_CODE")
-#TODO: Pull flight arrival from aviationstack
-flight_arrival = estimated_arrival         #this is the variable I use in my flights.py script
 
-def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,t_street=TADDRESS,t_city=TCITY,t_state=TSTATE,t_zip=TZIP_CODE,flight_arrival=flight_arrival):
-    request_url = f"http://www.mapquestapi.com/directions/v2/optimizedroute?key={MAPS_KEY}&from={f_street},+{f_city},+{f_state},+{f_zip}&to={t_street},+{t_city},+{t_state},+{t_zip}&timeType=3&isoLocal={flight_arrival}"
+a, b, c = get_flight_information()
+flight_arrival = (c[:-6])
+airport = (a)
+t_city = (b)
+
+def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,airport=airport,t_city=t_city,flight_arrival=flight_arrival):
+    request_url = f"http://www.mapquestapi.com/directions/v2/optimizedroute?key={MAPS_KEY}&from={f_street},+{f_city},+{f_state},+{f_zip}&to={t_city},+{airport}&timeType=3&isoLocal={flight_arrival}"
     response = requests.get(request_url)
     response_data = json.loads(response.text)
     print(response.status_code)
@@ -40,7 +37,11 @@ def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE
 if __name__ == "__main__":
 
     if APP_ENV == "development":
-        results = get_departure_time()
+        f_street = input("PLEASE INPUT YOUR STREET ADDRESS: ")
+        f_city = input("PLEASE INPUT YOUR CITY: ")
+        f_state = input("PLEASE INPUT YOUR STATE (e.g. NY): ")
+        f_zip = input("PLEASE INPUT YOUR ZIP CODE (e.g. 10012): ")
+        results = get_departure_time(f_street=f_street,f_city=f_city,f_state=f_state,f_zip=f_zip,)
     else:
         results = get_departure_time()
     print(f"LEAVE AT: {results}")    
