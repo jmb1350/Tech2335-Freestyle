@@ -5,7 +5,6 @@
 import json
 import csv
 import os
-import pyflightdata
 from datetime import datetime
 
 from dotenv import load_dotenv
