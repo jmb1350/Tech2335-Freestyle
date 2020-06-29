@@ -27,16 +27,20 @@ STATE = os.environ.get("STATE")
 ZIP_CODE = os.environ.get("ZIP_CODE")
 
 def get_flight_information(airline=AIRLINE,flight=FLIGHT):
+    print(airline)
+    print(flight)
     request_url = f"http://api.aviationstack.com/v1/flights?access_key={FLIGHT_KEY}&airline_name={airline}&flight_number={flight}&flight_status=active"
     response = requests.get(request_url)
     api_response = json.loads(response.text)
-    # print(api_response) 
+    print(api_response) 
+    # breakpoint()
     departure = dict()
+    # if any(api_response['data'])
     departure['arrival_airport'] = (api_response['data'][0]['arrival']['airport'])
     departure['timezone'] = (api_response['data'][0]['arrival']['timezone'][8:])
     departure['estimated_arrival'] = (api_response['data'][0]['arrival']['estimated_runway'])
     return departure
-    
+        
 def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,airport=AIRPORT,flight_arrival=FLIGHT_ARRIVAL):
     request_url = f"http://www.mapquestapi.com/directions/v2/optimizedroute?key={MAPS_KEY}&from={f_street},+{f_city},+{f_state},+{f_zip}&to={airport},+airport&timeType=3&isoLocal={flight_arrival}"
     response = requests.get(request_url)
@@ -59,12 +63,8 @@ if __name__ == "__main__":
     # print(results)
 
     flight_arrival = (results['estimated_arrival'][:-6])
-    # print(flight_arrival)
     airport = (results['arrival_airport'])
-    # print(airport)
-    
-    # t_city = (departure_info['timezone'])
-
+        
     if APP_ENV == "development":
         f_street = input("PLEASE INPUT YOUR STREET ADDRESS: ")
         f_city = input("PLEASE INPUT YOUR CITY: ")
