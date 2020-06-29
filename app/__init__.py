@@ -20,6 +20,9 @@ def create_app():
 
     return app
 
+# def start():
+#     from app.departure import get_flight_information, get_departure_time
+
 if __name__ == "__main__":
     my_app = create_app()
     my_app.run(debug=True)

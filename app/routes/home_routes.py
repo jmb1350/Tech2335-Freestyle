@@ -1,32 +1,23 @@
-# web_app/routes/weather_routes.py
+from flask import Blueprint, render_template, redirect, request, flash
 
-from flask import Blueprint, render_template, request
-
-from app.maps import get_departure_time
-from app.flights import get_flight_information
 
 home_routes = Blueprint("home_routes", __name__)
 
-# 
 @home_routes.route("/")
-def flight_form():
-    print("VISITED THE FLIGHT FORM...")
+def index():
+    print("VISITED THE HOME PAGE")
     return render_template("flight_form.html")
 
 @home_routes.route("/departure_details", methods=["POST"])
-def departure_details():
-    print("GENERATING DEPARTURE INFORMATION...")
+def flight_details():
+    print("FORM DATA:", dict(request.form))
+    # FYI: we are able to access the form data via the "request" object we import from flask
+    # ... these keys correspond with the "name" attributes of each <input> element in the form!
+    #> {'full_name': 'Example User', 'email_address': 'me@example.com', 'country': 'US'}
 
-    print("FORM DATA:", dict(request.form)) #> {'zip_code': '20057'}
-    f_address = request.form["f_address"]
-    f_city = request.form["f_city"]
-    f_state = request.form["f_state"]
-    f_zip = request.form["f_zip"]
-    flight = request.form["flight"]
-    airline = request.form["airline"]
-
-    results = get_flight_information(flight, airline) and get_departure_time(f_address, f_city, f_state, f_zip)
-    print(results.keys())
-    flash(f"Information submitted successfully", "success")
-    return render_template("flight_data.html", flight=flight, airline=airline, results=results)
-    # return("okay")
+    flight_departure = dict(request.form)
+    # FYI: "warning", "primary", "danger", "success", etc. are bootstrap color classes
+    # ... see https://getbootstrap.com/docs/4.3/components/alerts/
+    # ... and the flash messaging section of the "bootstrap_layout.html" file for more details
+    # flash("okay!", "success")
+    return redirect("/departure_details")

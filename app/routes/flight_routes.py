@@ -2,8 +2,7 @@
 
 from flask import Blueprint, render_template, request
 
-from app.maps import get_departure_time
-from app.flights import get_flight_information
+# from app.departure import get_departure_time, get_flight_information
 
 flight_routes = Blueprint("flight_routes", __name__)
 
@@ -25,7 +24,7 @@ def departure_details():
     flight = request.form["flight"]
     airline = request.form["airline"]
 
-    results = get_flight_information(flight, airline) and get_departure_time(f_address, f_city, f_state, f_zip)
+    results = departure.get_flight_information(flight, airline) and departure.get_departure_time(f_address, f_city, f_state, f_zip)
     print(results.keys())
     flash(f"Information submitted successfully", "success")
     return render_template("flight_data.html", flight=flight, airline=airline, results=results)
