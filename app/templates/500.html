@@ -1,0 +1,7 @@
+{% extends "bootstrap_layout.html" %}
+{% block title %}Server Error{% endblock %}
+{% block body %}
+  <h1>Oops, there was an issue!</h1>
+  <p>Please double-check the information entered and try again.
+  <p><a href="{{ url_for('home') }}">Click here to go back.</a>
+{% endblock %}
