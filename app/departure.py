@@ -27,18 +27,19 @@ STATE = os.environ.get("STATE")
 ZIP_CODE = os.environ.get("ZIP_CODE")
 
 def get_flight_information(airline=AIRLINE,flight=FLIGHT):
-    print(airline)
-    print(flight)
     request_url = f"http://api.aviationstack.com/v1/flights?access_key={FLIGHT_KEY}&airline_name={airline}&flight_number={flight}&flight_status=active"
     response = requests.get(request_url)
     api_response = json.loads(response.text)
-    print(api_response) 
+    # print(api_response) 
     # breakpoint()
     departure = dict()
-    # if any(api_response['data'])
-    departure['arrival_airport'] = (api_response['data'][0]['arrival']['airport'])
-    departure['timezone'] = (api_response['data'][0]['arrival']['timezone'][8:])
-    departure['estimated_arrival'] = (api_response['data'][0]['arrival']['estimated_runway'])
+    if any(api_response['data']):
+        departure['arrival_airport'] = (api_response['data'][0]['arrival']['airport'])
+        departure['timezone'] = (api_response['data'][0]['arrival']['timezone'][8:])
+        departure['estimated_arrival'] = (api_response['data'][0]['arrival']['estimated_runway'])
+    else:
+        print("There was an error with the flight information entered. Please try again.")
+        exit()
     return departure
         
 def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,airport=AIRPORT,flight_arrival=FLIGHT_ARRIVAL):
