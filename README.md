@@ -14,7 +14,7 @@ This program asks the user to input flight information and their address to dete
     - MAPQUEST_API
     - PLANE_API_KEY
 
-## Running the program:
+### Running the program:
 > `python app/departure.py`
 
 - Enter the required flight information when asked for input. You can refer to active flights at https://flightradar24.com
