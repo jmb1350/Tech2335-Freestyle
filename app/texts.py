@@ -13,7 +13,7 @@ MY_ADDRESS = os.environ.get("MY_EMAIL_ADDRESS", "OOPS, please set env var called
 
 client = SendGridAPIClient(SENDGRID_API_KEY)
 print("CLIENT:", type(client))
-send_at=
+#send_at=
 
 subject = "Your flight is arriving soon!"
 
