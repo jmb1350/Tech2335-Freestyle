@@ -31,7 +31,6 @@ def get_flight_information(airline=AIRLINE,flight=FLIGHT):
     response = requests.get(request_url)
     api_response = json.loads(response.text)
     # print(api_response) 
-    # breakpoint()
     departure = dict()
     if any(api_response['data']):
         departure['arrival_airport'] = (api_response['data'][0]['arrival']['airport'])
@@ -39,7 +38,7 @@ def get_flight_information(airline=AIRLINE,flight=FLIGHT):
         departure['estimated_arrival'] = (api_response['data'][0]['arrival']['estimated_runway'])
     else:
         print("There was an error with the flight information entered. Please try again.")
-        exit()
+        exit() 
     return departure
         
 def get_departure_time(f_street=ADDRESS,f_city=CITY,f_state=STATE,f_zip=ZIP_CODE,airport=AIRPORT,flight_arrival=FLIGHT_ARRIVAL):

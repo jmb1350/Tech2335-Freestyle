@@ -8,7 +8,7 @@ home_routes = Blueprint("home_routes", __name__)
 def flight_form():
     print("VISITED THE FLIGHT FORM...")
     return render_template("flight_form.html")
-    flash(f"Information submitted successfully", "success")
+    # flash(f"Information submitted successfully", "success")
 
 @home_routes.route("/departure_details", methods=["POST"])
 def departure_details():
@@ -25,7 +25,6 @@ def departure_details():
     # breakpoint()
     flight_information = get_flight_information(flight, airline) 
     departure_information = get_departure_time(f_address, f_city, f_state, f_zip)
-    # breakpoint()
     print(results.keys())
     return render_template("flight_data.html", flight=flight, airline=airline, results=results)
     # return("okay")
